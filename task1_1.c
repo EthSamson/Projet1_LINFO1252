@@ -19,7 +19,7 @@ void error(int err, char *msg){
 }
 
 void mange(int id) {
-  //printf("Philosophe [%d] mange\n",id);
+  printf("Philosophe [%d] mange\n",id);
 }
 
 void *philosophe(void *arg){
@@ -44,10 +44,17 @@ void *philosophe(void *arg){
 
 int main(int argc, char *argv[]){
   int philNum = atoi(argv[1]);
-  if(argc != 2) fprintf(stderr, "error : wrong number of args\n");
-  if(philNum < 2) fprintf(stderr, "error : not enough philosophes\n");
+  if(argc != 2){
+    fprintf(stderr, "error : wrong number of args\n");
+    return(EXIT_FAILURE);
+  }
+  if(philNum < 2){
+    fprintf(stderr, "error : not enough philosophes\n");
+    return(EXIT_FAILURE);
+  }
+  
   baguette = malloc(philNum*sizeof(pthread_mutex_t));
-  if(baguette==NULL) fprintf(stderr, "error malloc baguette\n");
+  if(baguette==NULL) fprintf(stderr, "error malloc baguette.\n");
   
   int i;
   Ids_t ids[philNum];
@@ -58,17 +65,19 @@ int main(int argc, char *argv[]){
     ids[i].left = i;
     ids[i].right = (i+1) % philNum;
   }
+  
   for(i=0; i<philNum; i++){
     err=pthread_mutex_init(&baguette[i],NULL);
     if(err!=0)
       error(err, "pthread_mutex_init");
   }
+  
   for(i=0; i<philNum; i++){
-    
     err=pthread_create(&phil[i], NULL, philosophe, (void*) &(ids[i]) );
     if(err!=0)
        error(err,"pthread_create");
   }
+  
   for(i=0; i<philNum; i++){
     pthread_join(phil[i], NULL);
     if(err!=0)
@@ -80,6 +89,7 @@ int main(int argc, char *argv[]){
     if(err!=0)
       error(err,"pthread_mutex_destroy");
   }
+  
   free(baguette);
   return (EXIT_SUCCESS);
 }
