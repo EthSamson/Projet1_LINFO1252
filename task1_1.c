@@ -19,7 +19,7 @@ void error(int err, char *msg){
 }
 
 void mange(int id) {
-  printf("Philosophe [%d] mange\n",id);
+  //printf("Philosophe [%d] mange\n",id);
 }
 
 void *philosophe(void *arg){
