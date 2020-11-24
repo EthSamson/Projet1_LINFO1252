@@ -1,53 +1,38 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int verrou = 0; //peut etre volatile
+typedef struct my_mutex{
+  int state;
+}my_mutex;
 
-int acquire_lock(int *lock){
-    asm("movl   %1, %%eax;"
-        "xchgl  %%eax, %[lock];" 
-        : "=r" (*lock)
-        : [lock] "r" (*lock)
-        : "%eax"
-        );
-    /*if(*lock){
-        aquire_lock(&verrou);
-    }*/
-    printf("Valeur de lock est %d\n", *lock);
-
+void my_mutex_init(my_mutex *mutex){
+  mutex->state = 0;
 }
 
-int release_lock(){
-
+void my_mutex_lock(my_mutex *mutex){
+  asm("enter:\t"
+      "movl $1, %%eax\t;"
+      "xchgl %%eax, %1\t;"
+      "testl %%eax, %%eax\t;"
+      "jnz enter\t;"
+      "movl $1, %%eax\t;"
+      "movl %%eax, %0;"
+      : "=r" (mutex->state)
+      : "r" (mutex->state)
+      : "%eax"
+      );
 }
 
-int test_and_set(int *lock){ //que faire le xchg dans l assembly les reste est fait en dehors 
-
-    /*asm("acquire_lock:"
-        "   movl $1, %%eax;"
-        "   xchgl %%eax, %[lock];"
-        "   cmpl $0, %%eax;"
-        "   jne aquire_lock;"
-        "   ret"
-        "release_lock:"
-        "   movl $0, %%eax;"
-        "   xchgl %%eax, %[lock];"
-        "   ret"
-        : "=a" (*lock)
-        : [lock] "r" (*lock)
-        );*/
+void my_mutex_unlock(my_mutex *mutex){
+  mutex->state = 0;
 }
 
-void enter_SC(){
-    while(test_and_set(&verrou)){
-        printf("Hello World!\n");
-    }
-}
-
-
-int main(){
-    verrou = 0;
-
-    acquire_lock(&verrou);
-
-    return 0;
+int main(int argc, char *argv[]){
+  my_mutex mutex;
+  my_mutex_init(&mutex);
+  my_mutex_lock(&mutex);
+  printf("%d\n",mutex.state);
+  my_mutex_unlock(&mutex);
+  printf("%d\n",mutex.state);
+  return EXIT_SUCCESS;
 }
