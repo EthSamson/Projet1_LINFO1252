@@ -26,7 +26,7 @@ void *philosophe(void *arg){
   Ids_t *ids = (Ids_t *) arg;
   int left = ids->left;
   int right = ids->right;
-  for(int i=0; i<10000;i++){
+  for(int i=0; i<1000000;i++){
     if(left < right){
       pthread_mutex_lock(&baguette[left]);
       pthread_mutex_lock(&baguette[right]);
@@ -39,9 +39,13 @@ void *philosophe(void *arg){
     pthread_mutex_unlock(&baguette[left]);
     pthread_mutex_unlock(&baguette[right]);
   }
+  //printf("Philosophe [%d] a fini\n",left);
   return (NULL);
 }
 
+/**
+ * arg1 : nb de philosophes (min 2)
+ */
 int main(int argc, char *argv[]){
   int philNum = atoi(argv[1]);
   if(argc != 2){
@@ -54,8 +58,10 @@ int main(int argc, char *argv[]){
   }
   
   baguette = malloc(philNum*sizeof(pthread_mutex_t));
-  if(baguette==NULL) fprintf(stderr, "error malloc baguette.\n");
-  
+  if(baguette==NULL){
+    fprintf(stderr, "error malloc baguette.\n");
+    return EXIT_FAILURE;
+  }
   int i;
   Ids_t ids[philNum];
   int err;

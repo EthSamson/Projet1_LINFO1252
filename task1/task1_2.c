@@ -6,10 +6,9 @@
 #include <errno.h>
 #include <string.h>
 #include <semaphore.h>
+#include <time.h>
 
-/**
- * PROGRAMME PAS TERMINE
- */
+
 // Initialisation
 #define N 6 // places dans le buffer
 
@@ -40,7 +39,7 @@ int produce(){
 int consume(int item){
   //for(int i=0; i<10000; i++); //constant time de consommation
   while(rand() > RAND_MAX/10000); //random time de consommation
-  return item/2; //return au pif osef, c'est juste pour l'exemple
+  return item/2;
 }
 
 void *producer(void *arg){
@@ -104,6 +103,7 @@ void *consumer(void *arg)
  * 3e arg : nombre produits 
  */
 int main(int argc, char *argv[]){
+  srand(time(NULL));
   int nb_producer = atoi(argv[1]);
   int nb_consumer = atoi(argv[2]);
   prod_nb = atoi(argv[3]);

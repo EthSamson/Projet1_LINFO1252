@@ -2,15 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-data = pd.read_csv("stats.csv")
+data = pd.read_csv("stats/stats3.csv")
 oneThread = np.array(data["one_thread"])
 twoThreads = np.array(data["two_threads"])
 threeThreads = np.array(data["three_threads"])
 fourThreads = np.array(data["four_threads"])
 fiveThreads = np.array(data["five_threads"])
 sixThreads = np.array(data["six_threads"])
-#sevenThreads = np.array(data["seven_threads"])
-#eightThreads = np.array(data["eight_threads"])
 
 means = [np.mean(oneThread),
          np.mean(twoThreads),
@@ -18,8 +16,6 @@ means = [np.mean(oneThread),
          np.mean(fourThreads),
          np.mean(fiveThreads),
          np.mean(sixThreads)]
-         #np.mean(sevenThreads),
-         #np.mean(eightThreads)]
 
 stds = [np.std(oneThread),
         np.std(twoThreads),
@@ -27,8 +23,6 @@ stds = [np.std(oneThread),
         np.std(fourThreads),
         np.std(fiveThreads),
         np.std(sixThreads)]
-        #np.std(sevenThreads),
-        #np.std(eightThreads),]
 
 fig1 = plt.figure(figsize=(10,10))
 
@@ -36,7 +30,7 @@ X = [i for i in range(1,7)]
 
 plt.errorbar(X, means, stds, fmt='.-', capsize=5, ecolor='red')
 
-plt.xlabel('numbers of threads')
+plt.xlabel('number of readers/writers')
 plt.ylabel('duration (in seconds)')
             
 plt.xlim(0, len(X)+1)
@@ -48,9 +42,9 @@ plt.yticks(np.linspace(0,
                         round(max(means)+max(stds)+2)))
 
 plt.grid(True)
-plt.title("Random sur consommation uniquement")
-plt.savefig("../img/test.png")
-plt.savefig("../img/test.pdf")
+plt.title("Results readers/writers")
+plt.savefig("img/readWrite.png")
+plt.savefig("img/readWrite.pdf")
 
 plt.show()
 plt.close()
