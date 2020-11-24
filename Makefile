@@ -3,8 +3,8 @@ PY3=python3
 DIR1 = task1
 TFLAGS=-lpthread -Wall -Werror
 
+
 all: graph1_1 graph1_2 graph1_3
-	graph1_1 graph1_2 graph1_3
 
 graph1_1: task1_1
 	cd $(DIR1) && $(PY3) graph1_1.py
