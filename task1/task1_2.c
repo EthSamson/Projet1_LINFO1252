@@ -10,7 +10,7 @@
 
 
 // Initialisation
-#define N 6 // places dans le buffer
+#define N 8 // places dans le buffer
 
 pthread_mutex_t mutex_buf; //mutex buffer
 pthread_mutex_t mutex_nb_prod; //mutex produits fabriqués
