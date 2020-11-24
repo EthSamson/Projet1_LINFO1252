@@ -1,4 +1,3 @@
-CC=gcc
 PY3=python3
 DIR1 = task1
 TFLAGS=-lpthread -Wall -Werror
