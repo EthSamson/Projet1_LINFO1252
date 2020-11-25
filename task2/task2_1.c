@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct my_mutex{
-  int state;
-}my_mutex;
+#include "task2_1.h"
 
 void my_mutex_init(my_mutex *mutex){
   mutex->state = 0;
@@ -24,15 +21,13 @@ void my_mutex_lock(my_mutex *mutex){
 }
 
 void my_mutex_unlock(my_mutex *mutex){
-  mutex->state = 0;
+  asm("movl %0, %%eax;"
+      "movl $0, %%ebx;"
+      "xchgl %%eax,%%ebx;"
+      "movl %%eax, %0;"
+      : "=r" (mutex->state)
+      :"r" (mutex->state)
+      : "%eax","%ebx"
+      );
 }
 
-int main(int argc, char *argv[]){
-  my_mutex mutex;
-  my_mutex_init(&mutex);
-  my_mutex_lock(&mutex);
-  printf("%d\n",mutex.state);
-  my_mutex_unlock(&mutex);
-  printf("%d\n",mutex.state);
-  return EXIT_SUCCESS;
-}

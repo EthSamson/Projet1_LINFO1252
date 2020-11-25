@@ -23,8 +23,6 @@ task1_2: task1/task1_2.c task1/Script1_2.sh
 task1_3: task1/task1_3.c task1/Script1_3.sh
 	cd $(DIR1) && ./Script1_3.sh
 
-.PHONY: clean
-
 clean1:
 	rm -rf $(DIR1)/philo $(DIR1)/prodCons $(DIR1)/readWrite
 
