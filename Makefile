@@ -1,5 +1,6 @@
 PY3=python3
 DIR1 = task1
+DIR2 = task2
 TFLAGS=-lpthread -Wall -Werror
 
 
