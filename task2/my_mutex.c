@@ -14,8 +14,8 @@ void my_mutex_lock(my_mutex *mutex){
       "jnz enter\t;"
       "movl $1, %%eax\t;"
       "movl %%eax, %0;"
-      : "=r" (mutex->state)
-      : "r" (mutex->state)
+      : "=m" (mutex->state)
+      : "m" (mutex->state)
       : "%eax"
       );
 }
@@ -25,8 +25,8 @@ void my_mutex_unlock(my_mutex *mutex){
       "movl $0, %%ebx;"
       "xchgl %%eax,%%ebx;"
       "movl %%eax, %0;"
-      : "=r" (mutex->state)
-      :"r" (mutex->state)
+      : "=m" (mutex->state)
+      :"m" (mutex->state)
       : "%eax","%ebx"
       );
 }

@@ -140,12 +140,12 @@ int main(int argc, char *argv[]){
       error(err, "pthread_create");
   }
   for(i=0; i<nb_producer; i++){
-    pthread_join(prod[i], NULL);
+    err = pthread_join(prod[i], NULL);
     if(err!=0)
       error(err, "pthread_join");
   }
   for(i=0; i<nb_consumer; i++){
-    pthread_join(cons[i], NULL);
+    err = pthread_join(cons[i], NULL);
     if(err!=0)
       error(err, "pthread_join");
   }
@@ -166,4 +166,6 @@ int main(int argc, char *argv[]){
   err = sem_destroy(&full);
   if(err != 0)
      error(err, "sem_destroy");
+  
+  return EXIT_SUCCESS;
 }

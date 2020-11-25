@@ -123,12 +123,12 @@ int main(int argc, char *argv[]){
    }
    
    for(i=0; i<nb_writers; i++){
-     pthread_join(writers[i], NULL);
+     err = pthread_join(writers[i], NULL);
      if(err!=0)
        error(err, "pthread_join");
    }
    for(i=0; i<nb_readers; i++){
-     pthread_join(readers[i], NULL);
+     err = pthread_join(readers[i], NULL);
      if(err!=0)
        error(err, "pthread_join");
    }
