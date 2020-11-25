@@ -60,11 +60,8 @@ void error(int err, char *msg){
  * effectue un certain nombre de random
  */
 void test_function(void *arg){
-  int th = *(int *)arg;
   while(true){
     my_mutex_testlock(&mutex);
-    //printf("thread %d entre dans sa section critique\n", th);
-    // printf("nb_sections : %d\n", nb_sections);
     if(nb_sections <= 0){
       printf("thread %d a terminé car nb_sections = 0\n\n", th);
       my_mutex_unlock(&mutex);
@@ -74,7 +71,6 @@ void test_function(void *arg){
       nb_sections--;
     
     while(rand() > RAND_MAX/10000);
-    //printf("thread %d quitte sa section critique\n\n", th);
     my_mutex_unlock(&mutex);
   }
 }

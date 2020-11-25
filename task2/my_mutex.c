@@ -19,10 +19,8 @@ void my_mutex_lock(my_mutex *mutex){
 }
 
 void my_mutex_unlock(my_mutex *mutex){
-  asm("movl %0, %%eax;"
-      "movl $0, %%ebx;"
-      "xchgl %%eax,%%ebx;"
-      "movl %%eax, %0;"
+  asm("movl $0, %%eax;"
+      "xchgl %%eax,%0;"
       : "=m" (mutex->state)
       :"m" (mutex->state)
       : "%eax","%ebx"
