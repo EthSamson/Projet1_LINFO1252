@@ -30,8 +30,8 @@ X = [i for i in range(2,14,2)]
 
 plt.errorbar(X, means, stds, fmt='.-', capsize=5, ecolor='red')
 
-plt.xlabel('number of philosophes (2 philo by core)')
-plt.ylabel('duration (in seconds)')
+plt.xlabel('Nombre de philosphe')
+plt.ylabel('Temps [sec]')
             
 plt.xlim(0,len(X)+1)
 plt.ylim(0, round(max(means)+max(stds)+1))
@@ -40,10 +40,9 @@ plt.xticks(np.linspace(0, 2*len(X)+2,  len(X)+2))
 plt.yticks(np.linspace(0,round(max(means)+max(stds)+1),11))
 
 plt.grid(True)
-plt.title("Results philosophes")
+plt.title("Problemes des philosophes")
 plt.savefig("img/philo.png")
 plt.savefig("img/philo.pdf")
 
 plt.show()
 plt.close()
-

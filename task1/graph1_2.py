@@ -30,8 +30,8 @@ X = [i for i in range(1,7)]
 
 plt.errorbar(X, means, stds, fmt='.-', capsize=5, ecolor='red')
 
-plt.xlabel('number of threads')
-plt.ylabel('duration (in seconds)')
+plt.xlabel('Nombre de producteurs/consommateurs')
+plt.ylabel('Temps [sec]')
             
 plt.xlim(0, len(X)+1)
 plt.ylim(0, round(max(means)+max(stds)+1))
@@ -42,10 +42,9 @@ plt.yticks(np.linspace(0,
                         round(max(means)+max(stds)+2)))
 
 plt.grid(True)
-plt.title("Results producers/consumers")
+plt.title("Probleme des producteurs/consommateurs")
 plt.savefig("img/prodCons.png")
 plt.savefig("img/prodCons.pdf")
 
 plt.show()
 plt.close()
-
