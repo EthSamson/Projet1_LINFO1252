@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "my_mutex.h"
 
-int nb_sections = 30;
+int nb_sections = 6400;
 my_mutex mutex;
 void error(int err, char *msg);
 void test_function(void *arg);
@@ -27,17 +27,14 @@ int main(int argc, char *argv[]){
   srand(time(NULL));
   int i;
   int err;
-  int zero = 0;
-  int un = 1;
   my_mutex_init(&mutex);
   pthread_t threads[nb_threads];
-  
+  int t_nb[nb_threads];
   for(i=0; i < nb_threads; i++){
-    if(i == zero)
-      err = pthread_create(&threads[i], NULL, (void *) test_function, &zero);
-    else
-      err = pthread_create(&threads[i], NULL, (void *) test_function, &un);
-    
+    t_nb[i] = i;
+  }
+  for(i=0; i < nb_threads; i++){
+    err = pthread_create(&threads[i], NULL, (void *) test_function, &t_nb[i]);
     if(err != 0)
       error(err, "pthread_create");
   }
@@ -58,21 +55,18 @@ void error(int err, char *msg){
  * effectue un certain nombre de random
  */
 void test_function(void *arg){
-  int th = *(int *)arg;
   while(true){
+    int th = *(int *)arg;
     my_mutex_lock(&mutex);
-    printf("thread %d rentre dans sa section critique\n", th);
-    printf("nb_section : %d\n",nb_sections);
     if(nb_sections <= 0){
-      printf("thread %d quitte sa section critique car nb_sections = 0\n", th);
+      printf("thread %d a terminé car nb_sections = 0\n", th);
       my_mutex_unlock(&mutex);
       return;
     }
     else
       nb_sections--;
     
-    //while(rand() > RAND_MAX/10000);
-    printf("thread %d quitte sa section critique\n\n", th);
+    while(rand() > RAND_MAX/10000);
     my_mutex_unlock(&mutex);
   }
 }

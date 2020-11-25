@@ -12,8 +12,6 @@ void my_mutex_lock(my_mutex *mutex){
       "xchgl %%eax, %1\t;"
       "testl %%eax, %%eax\t;"
       "jnz enter\t;"
-      "movl $1, %%eax\t;"
-      "movl %%eax, %0;"
       : "=m" (mutex->state)
       : "m" (mutex->state)
       : "%eax"
