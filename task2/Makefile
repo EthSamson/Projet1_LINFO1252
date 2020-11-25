@@ -1,14 +1,14 @@
 CC=gcc
 FLAGS=-lpthread -Wall -Werror
 
-mytest: main.o task2_1.o
-	$(CC) -o mytest main.o task2_1.o $(FLAGS)
+mytest: main.o my_mutex.o
+	$(CC) -o mytest main.o my_mutex.o $(FLAGS)
 
-main.o: main.c task2_1.h
+main.o: main.c my_mutex.h
 	$(CC) -c main.c $(FLAGS)
 
-task2_1.o: task2_1.c task2_1.h
-	$(CC) -c task2_1.c $(FLAGS)
+my_mutex.o: my_mutex.c my_mutex.h
+	$(CC) -c my_mutex.c $(FLAGS)
 
 clean:
 	rm -rf *.o mytest

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "task2_1.h"
+#include "my_mutex.h"
 
 void my_mutex_init(my_mutex *mutex){
   mutex->state = 0;

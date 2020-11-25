@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "task2_1.h"
+#include "my_mutex.h"
 
 int main(int argc, char *argv[]){
   my_mutex mutex;
