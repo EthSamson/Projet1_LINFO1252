@@ -63,7 +63,6 @@ void test_function(void *arg){
   while(true){
     my_mutex_testlock(&mutex);
     if(nb_sections <= 0){
-      printf("thread %d a terminé car nb_sections = 0\n\n", th);
       my_mutex_unlock(&mutex);
       return;
     }

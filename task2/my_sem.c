@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "my_mutex_test.h"
 #include "my_sem.h"
-#include "my_mutex.h"
 
 void my_sem_init(my_sem *sem, int nb){
   sem->max_state=nb;

@@ -7,7 +7,6 @@
 #include <string.h>
 #include "my_sem.h"
 #include "my_mutex.h"
-#include "my_mutex_test.h"
 #include <time.h>
 
 
@@ -128,19 +127,20 @@ int main(int argc, char *argv[]){
   
   my_sem_init(&empty, N);  // buffer vide
   my_sem_init(&full, 0);   // buffer vide
-  printf("empty.current_state : %d\n", empty.current_state);
-  printf("full.current_state : %d\n", empty.current_state);
-  printf("(empty.mutex).state : %d\n", (empty.mutex).state);
-  printf("(full.mutex).state : %d\n", (full.mutex).state);
+  
+  //printf("empty.current_state : %d\n", empty.current_state);
+  //printf("full.current_state : %d\n", empty.current_state);
+  //printf("(empty.mutex).state : %d\n", (empty.mutex).state);
+  // printf("(full.mutex).state : %d\n", (full.mutex).state);
   
   pthread_t prod[nb_producer];
   pthread_t cons[nb_consumer];
   int index_prod[nb_producer];
   int index_cons[nb_consumer];
-  for(int i=0; i < nb_producer; i++){
+  for( i=0; i < nb_producer; i++){
     index_prod[i] = i;
   }
-  for(int i=0; i < nb_consumer; i++){
+  for( i=0; i < nb_consumer; i++){
     index_cons[i] = i;
   }
   for(i=0; i<nb_producer; i++){
