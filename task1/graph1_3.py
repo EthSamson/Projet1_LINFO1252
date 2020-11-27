@@ -26,7 +26,8 @@ stds = [np.std(oneThread),
 
 fig1 = plt.figure(figsize=(10,10))
 
-X = [i for i in range(1,7)]
+shape = data.shape
+X = [i for i in range(2,2*shape[1],2)]
 
 plt.errorbar(X, means, stds, fmt='.-', capsize=5, ecolor='red')
 
@@ -36,7 +37,7 @@ plt.ylabel('Temps [sec]')
 plt.xlim(0, len(X)+1)
 plt.ylim(0, round(max(means)+max(stds)+1))
 
-plt.xticks(np.linspace(0, len(X)+1,  len(X)+2))
+plt.xticks(np.linspace(0, 2*len(X)+2, len(X)+2))
 plt.yticks(np.linspace(0,
                         round(max(means)+max(stds)+1),
                         round(max(means)+max(stds)+2)))

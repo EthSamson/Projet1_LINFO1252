@@ -26,7 +26,8 @@ stds = [np.std(oneThread),
 
 fig1 = plt.figure(figsize=(10,10))
 
-X = [i for i in range(2,14,2)]
+shape = data.shape
+X = [i for i in range(2,2*shape[1],2)]
 
 plt.errorbar(X, means, stds, fmt='.-', capsize=5, ecolor='red')
 

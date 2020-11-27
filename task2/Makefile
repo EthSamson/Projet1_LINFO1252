@@ -10,10 +10,10 @@ philotest: philo.o my_mutex.o
 prodconstest: prodcons.o my_sem.o my_mutex.o
 	$(CC) -o $@ $^ $(FLAGS)
 
-mytest2: main2.o my_mutex.o
+mytest2: task2_3.o my_mutex.o
 	$(CC)  -o $@ $^ $(FLAGS)
 
-mytest1: main1.o my_mutex.o
+mytest1: task2_1.o my_mutex.o
 	$(CC) -o $@ $^  $(FLAGS)
 
 %.o: %.c
