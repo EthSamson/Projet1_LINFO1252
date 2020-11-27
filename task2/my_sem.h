@@ -1,6 +1,7 @@
 #ifndef _TASK2_4_
 #define _TASK2_4_
 #include "my_mutex.h"
+
 /**
  * structure semaphore
  */

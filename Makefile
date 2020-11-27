@@ -15,7 +15,7 @@ graph1_2: task1_2
 graph1_3: task1_3
 	cd $(DIR1) && $(PY3) graph1_3.py
 
-task1_1: task1/task1_1.c task1/Script1_1.sh
+task1_1: $(DIR1)/task1_1.c $(DIR1)/Script1_1.sh
 	cd $(DIR1) && ./Script1_1.sh
 
 task1_2: task1/task1_2.c task1/Script1_2.sh

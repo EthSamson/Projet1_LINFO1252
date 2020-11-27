@@ -52,7 +52,7 @@ void error(int err, char *msg){
 }
 
 /**
- * effectue un certain nombre de random
+ * effectue un certain nombre de boucles random (donné par nb_sections)
  */
 void test_function(void *arg){
   while(true){

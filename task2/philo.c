@@ -5,14 +5,15 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#inlcude "my_mutex_test.h"
-#inlcude "my_mutex.h"
+#include "my_mutex.h"
+#include "my_sem.h"
+
 typedef struct Ids{
   int left;
   int right;
 } Ids_t;
 
-static pthread_mutex_t *baguette;
+static my_mutex *baguette;
 
 void error(int err, char *msg){
   fprintf(stderr, "%s a retourné %d message d'erreur : %s\n", msg, err, strerror(errno));
@@ -29,16 +30,16 @@ void *philosophe(void *arg){
   int right = ids->right;
   for(int i=0; i<1000000;i++){
     if(left < right){
-      pthread_mutex_lock(&baguette[left]);
-      pthread_mutex_lock(&baguette[right]);
+      my_mutex_testlock(&baguette[left]);
+      my_mutex_testlock(&baguette[right]);
     }
     else{
-      pthread_mutex_lock(&baguette[right]);
-      pthread_mutex_lock(&baguette[left]);
+      my_mutex_testlock(&baguette[right]);
+      my_mutex_testlock(&baguette[left]);
     }
     mange(ids->left);
-    pthread_mutex_unlock(&baguette[left]);
-    pthread_mutex_unlock(&baguette[right]);
+    my_mutex_unlock(&baguette[left]);
+    my_mutex_unlock(&baguette[right]);
   }
   //printf("Philosophe [%d] a fini\n",left);
   return (NULL);
@@ -58,7 +59,7 @@ int main(int argc, char *argv[]){
     return(EXIT_FAILURE);
   }
   
-  baguette = malloc(philNum*sizeof(pthread_mutex_t));
+  baguette = malloc(philNum*sizeof(my_mutex));
   if(baguette==NULL){
     fprintf(stderr, "error malloc baguette.\n");
     return EXIT_FAILURE;
@@ -74,9 +75,7 @@ int main(int argc, char *argv[]){
   }
   
   for(i=0; i<philNum; i++){
-    err=pthread_mutex_init(&baguette[i],NULL);
-    if(err!=0)
-      error(err, "pthread_mutex_init");
+    my_mutex_init(&baguette[i]);
   }
   
   for(i=0; i<philNum; i++){
@@ -89,12 +88,6 @@ int main(int argc, char *argv[]){
     pthread_join(phil[i], NULL);
     if(err!=0)
       error(err, "pthread_join");
-  }
-
-  for(i=0; i<philNum; i++){
-    pthread_mutex_destroy(&baguette[i]);
-    if(err!=0)
-      error(err,"pthread_mutex_destroy");
   }
   
   free(baguette);

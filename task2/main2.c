@@ -7,7 +7,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include "my_mutex.h"
-#include "my_mutex_test.h"
 
 int nb_sections = 6400;
 my_mutex mutex;

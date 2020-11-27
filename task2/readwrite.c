@@ -5,13 +5,13 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#include <semaphore.h>
 #include <time.h>
-
+#include "my_mutex.h"
+#include "my_sem.h"
 
 /* Init */
-sem_t sem_readcount; //modif readcount
-sem_t db; // accès à la db
+my_sem sem_readcount; //modif readcount
+my_sem db; // accès à la db
 int readcount=0; //nombre de readers
 int writing_nb = 640; //nombre d'écritures
 int reading_nb = 2560; //nombre de lectures
@@ -36,11 +36,11 @@ void writer(void){
   while(true){
     prepare_data();
 
-    sem_wait(&db);
+    my_sem_wait(&db);
     //section critique -> un seul writer à la fois sans reader
     if(writing_nb <= 0){
       //printf("end writing\n");
-      sem_post(&db);
+      my_sem_post(&db);
       return;
     }
     else
@@ -48,17 +48,17 @@ void writer(void){
     //printf("writing_nb : %d\n", writing_nb);
     write_database();
     //fin section critique
-    sem_post(&db);
+    my_sem_post(&db);
   }
 }
 
 void reader(void){
   while(true){
-    sem_wait(&sem_readcount);
+    my_sem_wait(&sem_readcount);
     //section critique
     if(reading_nb <= 0){
       //printf("end reading\n");
-      sem_post(&sem_readcount);
+      my_sem_post(&sem_readcount);
       return;
     }
     else
@@ -66,19 +66,19 @@ void reader(void){
     
     readcount++;
     //printf("reading_nb : %d\n", reading_nb);
-    sem_post(&sem_readcount);
+    my_sem_post(&sem_readcount);
     
     if(readcount==1) //arrivée du 1er reader
-      sem_wait(&db);
+      my_sem_wait(&db);
 
     read_database();
 
-    sem_wait(&sem_readcount);
+    my_sem_wait(&sem_readcount);
     //section critique
     readcount--;
     if(readcount==0) // depart du dernier reader
-      sem_post(&db);
-    sem_post(&sem_readcount);
+      my_sem_post(&db);
+    my_sem_post(&sem_readcount);
     process_data();
   }
 }
@@ -102,11 +102,9 @@ int main(int argc, char *argv[]){
     return EXIT_FAILURE;
   }
   
-  err = sem_init(&db, 0, 1);
-  if(err != 0) error(err, "sem_init");
+  my_sem_init(&db, 1);
 
-  err = sem_init(&sem_readcount, 0, 1);
-  if(err != 0) error(err, "sem_init");
+  my_sem_init(&sem_readcount, 1);
 
   pthread_t writers[nb_writers];
   pthread_t readers[nb_readers];
@@ -133,12 +131,5 @@ int main(int argc, char *argv[]){
        error(err, "pthread_join");
    }
    
-   err = sem_destroy(&sem_readcount);
-   if(err != 0)
-     error(err, "sem_destroy");
-   
-   err = sem_destroy(&db);
-   if(err != 0)
-     error(err, "sem_destroy");
    return EXIT_SUCCESS;
 }
