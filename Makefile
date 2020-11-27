@@ -8,8 +8,8 @@ all1:
 	#cd $(DIR2) && $(MAKE) all
 
 clean:
-	cd $(DIR1) && $(MAKE) clean
-	cd $(DIR2) && $(MAKE) clean
+	cd $(DIR1) && $(MAKE) $@
+	cd $(DIR2) && $(MAKE) $@
 
 mrproper:
 	cd $(DIR1) && $(MAKE) $@
