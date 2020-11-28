@@ -56,10 +56,10 @@ void error(int err, char *msg){
  */
 void test_function(void *arg){
   while(true){
-    int th = *(int *)arg;
+    //int th = *(int *)arg;
     my_mutex_lock(&mutex);
     if(nb_sections <= 0){
-      printf("thread %d a terminé car nb_sections = 0\n", th);
+      //printf("thread %d a terminé car nb_sections = 0\n", th);
       my_mutex_unlock(&mutex);
       return;
     }

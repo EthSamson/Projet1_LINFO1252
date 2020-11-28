@@ -53,7 +53,7 @@ void *producer(void *arg){
       // section critique 1 : modif nb de productions restantes
       if(prod_nb <= 0){
 	my_mutex_unlock(&mutex_nb_prod);
-	printf("producing done\n");
+	//printf("producing done\n");
 	break;
       }
       else
@@ -81,7 +81,7 @@ void *consumer(void *arg)
     //section critique 1 : modif nb de consommations restantes
     if(cons_nb <= 0){
       my_mutex_unlock(&mutex_nb_cons);
-      printf("consuming done\n");
+      //printf("consuming done\n");
       break;
     }
     else

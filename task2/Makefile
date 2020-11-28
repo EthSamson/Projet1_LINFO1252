@@ -10,14 +10,14 @@ philotest: philo.o my_mutex.o
 prodconstest: prodcons.o my_sem.o my_mutex.o
 	$(CC) -o $@ $^ $(FLAGS)
 
-mytest2: task2_3.o my_mutex.o
+tatastest: task2_3.o my_mutex.o
 	$(CC)  -o $@ $^ $(FLAGS)
 
-mytest1: task2_1.o my_mutex.o
+tastest: task2_1.o my_mutex.o
 	$(CC) -o $@ $^  $(FLAGS)
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
 clean:
-	rm -rf *.o mytest1 mytest2 mybadtest semtest prodconstest philotest readwritetest
+	rm -rf *.o tastest tatastest mybadtest semtest prodconstest philotest readwritetest
