@@ -20,7 +20,7 @@ do
 	output=$(/usr/bin/time -f %e ./prodCons $n $n 1024 2>&1)
 	myArray+=($output)
     done
-    echo $l,${myArray[*]} | tr ' ' ',' >> stats/stats2.csv
+    echo $l,${myArray[*]} | tr ' ' ',' >> stats/prodcons.csv
     unset myArray
     echo $l" run(s) done"
 done

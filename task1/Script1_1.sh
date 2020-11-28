@@ -22,7 +22,7 @@ do
 	output=$(/usr/bin/time -f %e ./philo $m 2>&1)
 	myArray+=($output)
     done
-    echo $l,${myArray[*]} | tr ' ' ',' >> stats/stats1.csv
+    echo $l,${myArray[*]} | tr ' ' ',' >> stats/philo.csv
     unset myArray
     echo $l" run(s) done"
 done

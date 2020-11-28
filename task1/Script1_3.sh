@@ -20,7 +20,7 @@ do
 	output=$(/usr/bin/time -f %e ./readWrite $n $n 2>&1)
 	myArray+=($output)
     done
-    echo $l,${myArray[*]} | tr ' ' ',' >> stats/stats3.csv
+    echo $l,${myArray[*]} | tr ' ' ',' >> stats/readwrite.csv
     unset myArray
     echo $l" run(s) done"
 done
