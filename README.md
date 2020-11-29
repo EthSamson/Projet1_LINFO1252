@@ -45,10 +45,36 @@ Pour le bon fonctionnement du code vous aurez besoin de télécharger plusieurs 
 ## Utilisation du Makefile
 
 Le projet contient un Makefile pour faciliter l'exécution des différents tests.
-Les commandes suivantes sont a effectuer dans le dossier prinipal.
+Les commandes à effectur sont répertoriées ci-dessous :
 
-### 
+- Cette commande permet d'afficher l'ensemble des graphes. Elle va aussi lancer la création des fichiers *.csv* si celui-ci est n'est pas présent pour un des algorithme : 
+```
+$ make allGraph
+```
 
+- Pour générer les fichiers *.csv* de la tâche 1 :
+```
+$ make allScript1
+```
+
+- Pour générer les fichiers *.csv* de la tâche 2 :
+```
+$ make allScript2
+```
+
+- Pour afficher le graphe d'un problème en particuliers et générer le fichier *.csv* correspondant si besoin : 
+```
+$ make Gphilo
+```
+```
+$ make Gprodcons
+```
+```
+$ make Greadwrite
+```
+```
+$ make Gtastatas
+```
 
 ## Auteurs
 
