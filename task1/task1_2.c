@@ -7,7 +7,7 @@
 #include <string.h>
 #include <semaphore.h>
 #include <time.h>
-
+#include <limits.h>
 
 // Initialisation
 #define N 8 // places dans le buffer
@@ -30,8 +30,8 @@ void error(int err, char *msg){
 }
 
 int produce(){
-  for(int i=0;rand() > RAND_MAX/10000;i++); //random time de production
-  return i;
+  while(rand() > RAND_MAX/10000); //random time de production
+  return INT_MIN+rand()+rand()+1;
 }
 
 int consume(int item){

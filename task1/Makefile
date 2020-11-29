@@ -1,15 +1,6 @@
 PY3=python3
 
-all: graph1_1 graph1_2 graph1_3
-
-graph1_1: task1_1
-	$(PY3) graph1_1.py
-
-graph1_2: task1_2
-	$(PY3) graph1_2.py
-
-graph1_3: task1_3
-	$(PY3) graph1_3.py
+all: task1_1.sh task1_2.sh task1_3.sh
 
 task1_1: task1_1.c Script1_1.sh
 	./Script1_1.sh
