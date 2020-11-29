@@ -12,7 +12,7 @@ MY_READWRITE_STATS = $(DIR2)/stats/readwrite.csv
 TAS_STAT = $(DIR2)/stats/tas.csv
 TATAS_STAT = $(DIR2)/stats/tatas.csv
 
-
+allGraph: Gphilo Gprodcons Greadwrite Gtastatas
 
 allScript1:
 	cd $(DIR1) && $(MAKE) all

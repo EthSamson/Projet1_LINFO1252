@@ -31,9 +31,8 @@ void error(int err, char *msg){
 }
 
 int produce(){
-  int i=0;
-  for(i=0;rand() > RAND_MAX/10000;i++); //random time de production
-  return i;
+  while(rand() > RAND_MAX/10000); //random time de production
+  return INT_MIN+rand()+rand()+1;
 }
 
 int consume(int item){

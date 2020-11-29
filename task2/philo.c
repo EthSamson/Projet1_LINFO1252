@@ -44,14 +44,14 @@ void *philosophe(void *arg){
 }
 
 /**
- * arg1 : nb de philosophes (min 2)
+ * @argv[1] : nb de philosophes (min 2)
  */
 int main(int argc, char *argv[]){
-  int philNum = atoi(argv[1]);
   if(argc != 2){
     fprintf(stderr, "error : wrong number of args\n");
     return(EXIT_FAILURE);
   }
+  int philNum = atoi(argv[1]);
   if(philNum < 2){
     fprintf(stderr, "error : not enough philosophes\n");
     return(EXIT_FAILURE);
