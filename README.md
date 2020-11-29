@@ -2,11 +2,11 @@
 
 Ce projet a été réalisé dans le cadre du cours LINFO1252 - Systèmes informatiques. Voici le lien vers le [repository GitHub](https://github.com/EthSamson/Projet1_LINFO1252).
 
-L'objectif est de tester et comparer les algorithmes de synchronisations de threads. Pour ensuite afficher les résultats à travers des graphes.
+L'objectif est de tester et de comparer les algorithmes de synchronisation des threads, pour ensuite afficher les résultats à travers des graphes.
 
 ## Pré-requis
 
-Pour le bon fonctionnement du code vous aurez besoin de télécharger plusieurs librairies et packages :
+Pour le bon fonctionnement du code, vous aurez besoin de télécharger plusieurs librairies et packages :
 
 - Python3
 - Numpy (python)
@@ -49,12 +49,12 @@ Les commandes à effectuer dans le terminal sont répertoriées ci-dessous :
 
 ### Lancement des tests :
 
-- Pour afficher l'ensemble des graphes. Cette commande va aussi lancer les test de performances et créer les fichiers *.csv* si celui-ci est n'est pas présent pour un des algorithme : 
+- Pour afficher l'ensemble des graphes. Cette commande va aussi lancer les tests de performance et créer le fichier *.csv* de l'algorithme correspondant si celui-ci est n'est pas présent : 
 ```
 $ make allGraph
 ```
 
-- Pour lancer les tests de performances et génére les fichiers *.csv* pour la tâche 1 et 2 respectivement :
+- Pour lancer les tests de performance et générer les fichiers *.csv* pour l'ensemble de la tâche 1 et 2 respectivement :
 ```
 $ make allScript1
 ```
@@ -62,7 +62,7 @@ $ make allScript1
 $ make allScript2
 ```
 
-- Pour afficher le graphe d'un problème en particuliers et générer le fichier *.csv* correspondant si besoin :
+- Pour afficher le graphe d'un problème en particulier et générer le fichier *.csv* correspondant si besoin :
 ```
 $ make Gphilo
 ```
@@ -86,7 +86,7 @@ $ make clean1
 $ make clean2
 ```
 
-- Pour supprimer les fichiers *.csv* et les fichiers d'exécution propre à la tâche 1 et 2 respectivement :
+- Pour supprimer les fichiers *.csv* et les fichiers d'exécution de la tâche 1 et 2 respectivement :
 ```
 $ make mrproper1
 ```
