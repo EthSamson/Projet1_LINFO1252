@@ -6,11 +6,15 @@
 #include <errno.h>
 #include <string.h>
 
+/*
+ * Structure utilisée pour donner les bons id en arguments des philosophes 
+ */
 typedef struct Ids{
   int left;
   int right;
 } Ids_t;
 
+//initialisation de baguette sans la taille vu qu'on ne la connait pas encore
 static pthread_mutex_t *baguette;
 
 void error(int err, char *msg){
@@ -19,7 +23,6 @@ void error(int err, char *msg){
 }
 
 void mange(int id) {
-  //printf("Philosophe [%d] mange\n",id);
 }
 
 void *philosophe(void *arg){
@@ -39,12 +42,11 @@ void *philosophe(void *arg){
     pthread_mutex_unlock(&baguette[left]);
     pthread_mutex_unlock(&baguette[right]);
   }
-  //printf("Philosophe [%d] a fini\n",left);
   return (NULL);
 }
 
 /**
- * arg1 : nb de philosophes (min 2)
+ * @argv[1] : nb de philosophes (min 2)
  */
 int main(int argc, char *argv[]){
   int philNum = atoi(argv[1]);
@@ -57,12 +59,14 @@ int main(int argc, char *argv[]){
     return(EXIT_FAILURE);
   }
   
+  //malloc obligatoire vu qu'on ne sait pas à l'avance la taille de la baguette
   baguette = malloc(philNum*sizeof(pthread_mutex_t));
   if(baguette==NULL){
     fprintf(stderr, "error malloc baguette.\n");
     return EXIT_FAILURE;
   }
   int i;
+  //tableau des id qu'on va passer en argument
   Ids_t ids[philNum];
   int err;
   pthread_t phil[philNum];

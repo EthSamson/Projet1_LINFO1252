@@ -5,7 +5,7 @@ import pandas as pd
 data1 = pd.read_csv("task1/stats/philo.csv")
 data2 = pd.read_csv("task2/stats/philo.csv")
 
-#Traitement du fichier csv des philosophes(mutex)
+#Traitement du fichier csv des philosophes(posix)
 oneThread1 = np.array(data1["one_thread"])
 twoThreads1 = np.array(data1["two_threads"])
 threeThreads1 = np.array(data1["three_threads"])

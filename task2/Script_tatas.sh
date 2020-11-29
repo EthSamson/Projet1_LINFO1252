@@ -13,6 +13,7 @@ do
     for((n=1;n<=NPROC;n++))
     do
 	m=$((2 * $n))
+	echo $m" threads"
 	output=$(/usr/bin/time -f %e ./tatastest $m 2>&1)
 	myArray+=($output)
     done

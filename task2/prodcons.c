@@ -32,20 +32,17 @@ void error(int err, char *msg){
 
 int produce(){
   int i=0;
-  //for(i=0; i<1000000; i++); //constant time de production
   for(i=0;rand() > RAND_MAX/10000;i++); //random time de production
   return i;
 }
 
 int consume(int item){
-  //for(int i=0; i<10000; i++); //constant time de consommation
   while(rand() > RAND_MAX/10000); //random time de consommation
   return item/2;
 }
 
 void *producer(void *arg){
   int item = 2;
-  //int *th = (int *) arg;
   while(true)
     {
       my_mutex_testlock(&mutex_nb_prod);
@@ -53,7 +50,6 @@ void *producer(void *arg){
       // section critique 1 : modif nb de productions restantes
       if(prod_nb <= 0){
 	my_mutex_unlock(&mutex_nb_prod);
-	//printf("producing done\n");
 	break;
       }
       else
@@ -74,14 +70,12 @@ void *producer(void *arg){
 }
 void *consumer(void *arg)
 {
-  //int *th = (int *) arg;
   int item;
   while(true){
     my_mutex_testlock(&mutex_nb_cons);
     //section critique 1 : modif nb de consommations restantes
     if(cons_nb <= 0){
       my_mutex_unlock(&mutex_nb_cons);
-      //printf("consuming done\n");
       break;
     }
     else
@@ -127,11 +121,6 @@ int main(int argc, char *argv[]){
   
   my_sem_init(&empty, N);  // buffer vide
   my_sem_init(&full, 0);   // buffer vide
-  
-  //printf("empty.current_state : %d\n", empty.current_state);
-  //printf("full.current_state : %d\n", empty.current_state);
-  //printf("(empty.mutex).state : %d\n", (empty.mutex).state);
-  // printf("(full.mutex).state : %d\n", (full.mutex).state);
   
   pthread_t prod[nb_producer];
   pthread_t cons[nb_consumer];

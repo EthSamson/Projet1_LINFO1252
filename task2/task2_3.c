@@ -27,7 +27,6 @@ int main(int argc, char *argv[]){
   int i;
   int err;
   my_mutex_init(&mutex);
-  //printf("state : %d\n", mutex.state);
   pthread_t threads[nb_threads];
   int t_nb[nb_threads];
   

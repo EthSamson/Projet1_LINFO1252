@@ -21,10 +21,8 @@ void error(int err, char *msg){
 }
 
 void write_database(){
-  // while(rand() > RAND_MAX/10000);
 }
 void read_database(){
-  //while(rand() >  RAND_MAX/10000);
 }
 void process_data(){
   while(rand() >  RAND_MAX/10000);
@@ -39,13 +37,11 @@ void writer(void){
     sem_wait(&db);
     //section critique -> un seul writer à la fois sans reader
     if(writing_nb <= 0){
-      //printf("end writing\n");
       sem_post(&db);
       return;
     }
     else
       writing_nb--;
-    //printf("writing_nb : %d\n", writing_nb);
     write_database();
     //fin section critique
     sem_post(&db);
@@ -57,7 +53,6 @@ void reader(void){
     sem_wait(&sem_readcount);
     //section critique
     if(reading_nb <= 0){
-      //printf("end reading\n");
       sem_post(&sem_readcount);
       return;
     }
@@ -65,7 +60,6 @@ void reader(void){
       reading_nb--;
     
     readcount++;
-    //printf("reading_nb : %d\n", reading_nb);
     sem_post(&sem_readcount);
     
     if(readcount==1) //arrivée du 1er reader

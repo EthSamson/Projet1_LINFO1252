@@ -21,7 +21,6 @@ void error(int err, char *msg){
 }
 
 void mange(int id) {
-  //printf("Philosophe [%d] mange\n",id);
 }
 
 void *philosophe(void *arg){
@@ -41,7 +40,6 @@ void *philosophe(void *arg){
     my_mutex_unlock(&baguette[left]);
     my_mutex_unlock(&baguette[right]);
   }
-  //printf("Philosophe [%d] a fini\n",left);
   return (NULL);
 }
 

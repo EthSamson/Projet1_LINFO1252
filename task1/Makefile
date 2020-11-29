@@ -20,8 +20,10 @@ task1_2: task1_2.c Script1_2.sh
 task1_3: task1_3.c Script1_3.sh
 	./Script1_3.sh
 
+.PHONY: clean
+
 clean:
 	rm -rf philo prodCons readWrite
 
 mrproper: clean
-	rm -rf /img/*.pdf /img/*.png /stats/*.csv 
+	rm -rf /stats/*.csv 

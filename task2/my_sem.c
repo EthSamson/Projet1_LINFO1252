@@ -3,7 +3,6 @@
 #include "my_sem.h"
 
 void my_sem_init(my_sem *sem, int nb){
-  sem->max_state=nb;
   sem->current_state=nb;
   my_mutex_init(&(sem->mutex));
 }
