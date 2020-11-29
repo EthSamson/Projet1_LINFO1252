@@ -11,7 +11,7 @@ gcc task1_1.c -o philo -lpthread -Wall -Werror
 
 
 echo "==PHILOSOPHES=="
-echo "numTentative,one_thread,two_threads,three_threads,four_threads,five_threads,six_threads" > stats/stats1.csv
+echo "numTentative,one_thread,two_threads,three_threads,four_threads,five_threads,six_threads" > stats/philo.csv
 
 for((l=1;l<=run;l++))
 do

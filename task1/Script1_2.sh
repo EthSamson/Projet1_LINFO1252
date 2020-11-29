@@ -10,7 +10,7 @@ run=5
 gcc task1_2.c -o prodCons -lpthread -Wall -Werror
 
 echo "==PRODUCERS - CONSUMMERS=="
-echo "numTentative,one_thread,two_threads,three_threads,four_threads,five_threads,six_threads" > stats/stats2.csv
+echo "numTentative,one_thread,two_threads,three_threads,four_threads,five_threads,six_threads" > stats/prodcons.csv
 
 for((l=1;l<=run;l++))
 do

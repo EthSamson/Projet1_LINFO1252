@@ -32,4 +32,3 @@ void my_sem_post(my_sem *sem){
   sem->current_state = sem->current_state + 1;
   my_mutex_unlock(&(sem->mutex));
 }
-
