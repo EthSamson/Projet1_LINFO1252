@@ -2,7 +2,7 @@
 
 Ce projet a été réalisé dans le cadre du cours LINFO1252 - Systèmes informatiques. Voici le lien vers le [repository GitHub](https://github.com/EthSamson/Projet1_LINFO1252).
 
-L'objectif est de tester les algorithmes de synchronisations de threads et de montrer ces résultats à travers des graphes.
+L'objectif est de tester et comparer les algorithmes de synchronisations de threads. Pour ensuite afficher les résultats à travers des graphes.
 
 ## Pré-requis
 
@@ -45,24 +45,24 @@ Pour le bon fonctionnement du code vous aurez besoin de télécharger plusieurs 
 ## Utilisation du Makefile
 
 Le projet contient un Makefile pour faciliter l'exécution des différents tests.
-Les commandes à effectur sont répertoriées ci-dessous :
+Les commandes à effectuer dans le terminal sont répertoriées ci-dessous :
 
-- Cette commande permet d'afficher l'ensemble des graphes. Elle va aussi lancer la création des fichiers *.csv* si celui-ci est n'est pas présent pour un des algorithme : 
+### Lancement des tests :
+
+- Pour afficher l'ensemble des graphes. Cette commande va aussi lancer les test de performances et créer les fichiers *.csv* si celui-ci est n'est pas présent pour un des algorithme : 
 ```
 $ make allGraph
 ```
 
-- Pour générer les fichiers *.csv* de la tâche 1 :
+- Pour lancer les tests de performances et génére les fichiers *.csv* pour la tâche 1 et 2 respectivement :
 ```
 $ make allScript1
 ```
-
-- Pour générer les fichiers *.csv* de la tâche 2 :
 ```
 $ make allScript2
 ```
 
-- Pour afficher le graphe d'un problème en particuliers et générer le fichier *.csv* correspondant si besoin : 
+- Pour afficher le graphe d'un problème en particuliers et générer le fichier *.csv* correspondant si besoin :
 ```
 $ make Gphilo
 ```
@@ -74,6 +74,24 @@ $ make Greadwrite
 ```
 ```
 $ make Gtastatas
+```
+
+### Commande clean et mrproper :
+
+- Pour supprimer les fichiers d'exécution de la tâche 1 et 2 respectivement :
+```
+$ make clean1
+```
+```
+$ make clean2
+```
+
+- Pour supprimer les fichiers *.csv* et les fichiers d'exécution propre à la tâche 1 et 2 respectivement :
+```
+$ make mrproper1
+```
+```
+$ make mrproper2
 ```
 
 ## Auteurs
