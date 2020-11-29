@@ -1,5 +1,5 @@
 - mettre les commandes en silent / V
-- supprimer les .py dans la task 1 
+- supprimer les .py dans la task 1 (Louis)
 - changer les make dans la task 1 V
 - faire un readme ? (Louis)
 - changer produce  V
