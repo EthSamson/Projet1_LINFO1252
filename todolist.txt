@@ -1,6 +1,7 @@
 - mettre les commandes en silent / V
 - supprimer les .py dans la task 1 (Louis)
 - changer les make dans la task 1 V
-- faire un readme ? (Louis)
+- faire un readme ? (Louis) (Qu'est ce que c'est task1/test.c -> checker le README en fonction)
+- 
 - changer produce  V
 - changer reader/Write : donner la prio aux écrivains
