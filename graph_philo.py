@@ -54,8 +54,8 @@ philo = plt.figure()
 shape = data1.shape
 X = range(2,2*(shape[1]), 2)
 
-plt.errorbar(X, means1, stds1, fmt='.-', capsize=5, ecolor='black', label="Philosophes tache 1")
-plt.errorbar(X, means2, stds2, fmt='.-', capsize=5, ecolor='grey', label="Philosophes tache 2")
+plt.errorbar(X, means1, stds1, fmt='.-', capsize=5, ecolor='black', label="Philosophes tâche 1")
+plt.errorbar(X, means2, stds2, fmt='.-', capsize=5, ecolor='grey', label="Philosophes tâche 2")
 
 plt.xlabel("Nombre de philosphes")
 plt.xlim(0, 2*len(X)+1)

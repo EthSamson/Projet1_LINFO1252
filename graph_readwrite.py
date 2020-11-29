@@ -54,17 +54,17 @@ philo = plt.figure()
 shape = data1.shape
 X = range(2,2*(shape[1]), 2)
 
-plt.errorbar(X, means1, stds1, fmt='.-', capsize=5, ecolor='black', label="Lect/ecri tache 1")
-plt.errorbar(X, means2, stds2, fmt='.-', capsize=5, ecolor='grey', label="Lect/ecri tache 2")
+plt.errorbar(X, means1, stds1, fmt='.-', capsize=5, ecolor='black', label="Lect/écri tâche 1")
+plt.errorbar(X, means2, stds2, fmt='.-', capsize=5, ecolor='grey', label="Lect/écri tâche 2")
 
-plt.xlabel("Nombre de lecteurs/ecrivains")
+plt.xlabel("Nombre de lecteurs/écrivains")
 plt.xlim(0, 2*len(X)+1)
 
 plt.ylabel("Temps [sec]")
 plt.ylim(0, max(round(max(means1)+max(stds1)+1),round(max(means2)+max(stds2)+1)))
 
 plt.grid(True)
-plt.title("Evaluation du probleme des lecteurs/ecrivains")
+plt.title("Evaluation du problème des lecteurs/écrivains")
 plt.legend()
 plt.savefig("img/readWrite.png")
 plt.savefig("img/readWrite.pdf")
