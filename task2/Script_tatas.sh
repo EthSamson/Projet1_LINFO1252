@@ -1,3 +1,5 @@
+#/bin/bash
+
 NPROC=6
 run=5
 
