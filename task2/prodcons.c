@@ -8,7 +8,7 @@
 #include "my_sem.h"
 #include "my_mutex.h"
 #include <time.h>
-
+#include <limits.h>
 
 // Initialisation
 #define N 8 // places dans le buffer
