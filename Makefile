@@ -79,7 +79,7 @@ clean2:
 	@(cd $(DIR2) && $(MAKE) -s clean)
 
 mrproper1: clean1
-	@(cd $(DIR1) && $(MAKE) )-s mrproper)
+	@(cd $(DIR1) && $(MAKE) -s mrproper)
 
-mrproprer2: clean2
+mrproper2: clean2
 	@(cd $(DIR2) && $(MAKE) -s mrproper)

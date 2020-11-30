@@ -42,4 +42,4 @@ clean:
 	@rm -rf *.o tastest tatastest mybadtest semtest prodconstest philotest readwritetest
 
 mrproper: clean
-	rm -rf /stats/*.csv 
+	@rm -rf /stats/*.csv 
