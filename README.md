@@ -12,10 +12,13 @@ Pour le bon fonctionnement du code, vous aurez besoin de télécharger plusieurs
 - Numpy (python)
 - Matplotlib (python)
 - Pandas (python)
-
+- GCC
+- Make
 ## Contenu du projet
 
 *< img >* : contient l'ensemble des graphes réalisés par les tests au format *.pdf* et *.png*.
+*< Makefile >* : Makefile principale qui automatise l'ensemble des tests du projet.
+*< graph_philo.py, graph_prodcons.py ,graph_readwrite.py, graph_tas_tatas.py >* : traîtent les fichiers *.csv* pour créer les graphes.
 
 *< task1 >* :
 - *< stats >* : contient les fichiers *.csv* qui regroupe les temps mesurés par les tests.
@@ -36,10 +39,6 @@ Pour le bon fonctionnement du code, vous aurez besoin de télécharger plusieurs
 - *< readwrite.c >* : adaptation du problème des lecteurs-écrivains avec les primitives d'attente active.
 - *< task2_1.c >* : regroupe les fonctions de mise en oeuvre de l'algorithme test-and-set.
 - *< task2_3.c >* : regroupe les fonctions de mise en oeuvre de l'algorithme test-and-test-and-set.
-
-*< Makefile >* : Makefile principale qui automatise l'ensemble des tests du projet.
-
-*< graph_philo,prodcons,readwrite,tas_tatas.py >* : traîtent les fichiers *.csv* pour créer les graphes.
 
 
 ## Utilisation du Makefile

@@ -3,19 +3,19 @@ FLAGS=-lpthread -Wall -Werror
 
 all: scriptPhilo scriptReadwrite scriptProdcons scriptTas scriptTatas
 
-scriptPhilo: philotest
+scriptPhilo:
 	./Script_philo.sh
 
-scriptReadwrite: readwritetest
+scriptReadwrite:
 	./Script_readwrite.sh
 
-scriptProdcons: prodconstest
+scriptProdcons:
 	./Script_prodcons.sh
 
-scriptTas: tastest
+scriptTas:
 	./Script_tas.sh
 
-scriptTatas: tatastest
+scriptTatas:
 	./Script_tatas.sh
 
 readwritetest: readwrite.o my_sem.o my_mutex.o
