@@ -14,10 +14,15 @@ Pour le bon fonctionnement du code, vous aurez besoin de télécharger plusieurs
 - Pandas (python)
 - GCC
 - Make
+
+L'ensemble du projet a été réalisé pour une machine possédant 6 coeurs.
+
 ## Contenu du projet
 
 *< img >* : contient l'ensemble des graphes réalisés par les tests au format *.pdf* et *.png*.
+
 *< Makefile >* : Makefile principale qui automatise l'ensemble des tests du projet.
+
 *< graph_philo.py, graph_prodcons.py ,graph_readwrite.py, graph_tas_tatas.py >* : traîtent les fichiers *.csv* pour créer les graphes.
 
 *< task1 >* :
