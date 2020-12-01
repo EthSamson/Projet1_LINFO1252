@@ -17,4 +17,4 @@ clean:
 	@rm -rf philo prodCons readWrite
 
 mrproper: clean
-	@rm -rf /stats/*.csv 
+	@rm -rf stats/*.csv 
