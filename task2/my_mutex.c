@@ -39,6 +39,6 @@ void my_mutex_testlock(my_mutex *mutex){
       : "m" (mutex->state)
       : "%eax"
       );
-    while(mutex->state);
+    while(i) i = mutex->state;
   }
 }
