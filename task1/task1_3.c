@@ -6,79 +6,106 @@
 #include <errno.h>
 #include <string.h>
 #include <semaphore.h>
-#include <time.h>
 
+pthread_mutex_t mutex_readcount;
+pthread_mutex_t mutex_writecount;
 
-/* Init */
-sem_t sem_readcount; //modif readcount
 sem_t db; // accès à la db
-int readcount=0; //nombre de readers
+sem_t reader_block; //bloquer les readers
+
+int readcount=0; //nombre de readers 
+int writecount=0; //nombre de writers
 int writing_nb = 640; //nombre d'écritures
 int reading_nb = 2560; //nombre de lectures
+
 void error(int err, char *msg){
   fprintf(stderr, "%s a retourné %d message d'erreur : %s\n", msg, err, strerror(errno));
   exit(EXIT_FAILURE);
 }
 
 void write_database(){
+  //while(rand() > RAND_MAX/10000);
 }
 void read_database(){
+  //while(rand() > RAND_MAX/10000); 
 }
 void process_data(){
-  while(rand() >  RAND_MAX/10000);
+  while(rand() > RAND_MAX/10000);
 }
 void prepare_data(){
+  //printf("prepare data\n");
   while(rand() > RAND_MAX/10000);
 }
 void writer(void){
   while(true){
     prepare_data();
-
-    sem_wait(&db);
-    //section critique -> un seul writer à la fois sans reader
+    
+    pthread_mutex_lock(&mutex_writecount);
+    //section critique 1 : modif writecount et writing_nb
     if(writing_nb <= 0){
-      sem_post(&db);
-      return;
+      pthread_mutex_unlock(&mutex_writecount);
+      break;
     }
     else
       writing_nb--;
+    writecount++;
+    if(writecount==1)
+      sem_wait(&reader_block);
+    //end section 1
+    pthread_mutex_unlock(&mutex_writecount);
+
+    sem_wait(&db);
+    //section critique 2 -> un seul writer à la fois sur db
     write_database();
-    //fin section critique
     sem_post(&db);
+    //end section 2
+    pthread_mutex_lock(&mutex_writecount);
+    //section critique 3 : modif writecount
+    writecount--;
+   
+    if(writecount==0)
+      sem_post(&reader_block);
+    //end section 3
+    pthread_mutex_unlock(&mutex_writecount);
   }
 }
 
 void reader(void){
   while(true){
-    sem_wait(&sem_readcount);
-    //section critique
+    sem_wait(&reader_block);//vérifie si un writer ne bloque pas la lecture
+    pthread_mutex_lock(&mutex_readcount);
+    //section critique 1 : modif readcount et reading_nb
     if(reading_nb <= 0){
-      sem_post(&sem_readcount);
-      return;
+      pthread_mutex_unlock(&mutex_readcount);
+      sem_post(&reader_block);
+      break;
     }
     else
       reading_nb--;
-    
     readcount++;
-    sem_post(&sem_readcount);
-    
     if(readcount==1) //arrivée du 1er reader
       sem_wait(&db);
-
+    //end section 1
+    pthread_mutex_unlock(&mutex_readcount);
+    sem_post(&reader_block);
     read_database();
-
-    sem_wait(&sem_readcount);
-    //section critique
+    pthread_mutex_lock(&mutex_readcount);
+    //section critique 2 : modif readcount
     readcount--;
     if(readcount==0) // depart du dernier reader
       sem_post(&db);
-    sem_post(&sem_readcount);
+    //end section 2
+    pthread_mutex_unlock(&mutex_readcount);
+    
     process_data();
   }
 }
 
+/**
+ * 1er arg : nb writers
+ * 2e arg : nb readers
+ */
 int main(int argc, char *argv[]){
-  srand(time(NULL));
   if(argc != 3){
     fprintf(stderr,"error : wrong args number\n");
     return EXIT_FAILURE;
@@ -98,10 +125,14 @@ int main(int argc, char *argv[]){
   
   err = sem_init(&db, 0, 1);
   if(err != 0) error(err, "sem_init");
-
-  err = sem_init(&sem_readcount, 0, 1);
+  err =sem_init(&reader_block, 0, 1);
   if(err != 0) error(err, "sem_init");
 
+  err = pthread_mutex_init(&mutex_readcount, NULL);
+  if(err != 0) error(err, "pthread_mutex_init");
+  err = pthread_mutex_init(&mutex_writecount, NULL);
+  if(err != 0) error(err, "pthread_mutex_init");
+  
   pthread_t writers[nb_writers];
   pthread_t readers[nb_readers];
 
@@ -111,26 +142,32 @@ int main(int argc, char *argv[]){
        error(err, "pthread_create");
    }
    for(i=0; i<nb_readers; i++){
-     err = pthread_create(&readers[i], NULL,(void *) reader, NULL);
+     err = pthread_create(&readers[i], NULL, (void *)reader, NULL);
      if(err != 0)
        error(err, "pthread_create");
    }
    
    for(i=0; i<nb_writers; i++){
-     err = pthread_join(writers[i], NULL);
+     pthread_join(writers[i], NULL);
      if(err!=0)
        error(err, "pthread_join");
    }
    for(i=0; i<nb_readers; i++){
-     err = pthread_join(readers[i], NULL);
+     pthread_join(readers[i], NULL);
      if(err!=0)
        error(err, "pthread_join");
    }
    
-   err = sem_destroy(&sem_readcount);
+   err = pthread_mutex_destroy(&mutex_readcount);
+   if(err != 0)
+     error(err, "pthread_mutex_destroy");
+   err = pthread_mutex_destroy(&mutex_writecount);
+   if(err != 0)
+     error(err, "pthread_mutex_destroy");
+   
+   err = sem_destroy(&reader_block);
    if(err != 0)
      error(err, "sem_destroy");
-   
    err = sem_destroy(&db);
    if(err != 0)
      error(err, "sem_destroy");
