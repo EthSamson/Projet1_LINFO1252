@@ -15,7 +15,7 @@ Pour le bon fonctionnement du code, vous aurez besoin de télécharger plusieurs
 - GCC
 - Make
 
-L'ensemble du projet a été réalisé pour une machine possédant 6 coeurs.
+L'ensemble du projet a été réalisé pour une machine possédant 6 coeurs (et donc 12 threads).
 
 ## Contenu du projet
 
